@@ -4,6 +4,7 @@ import {LoginComponent} from "./views/login/login.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {AdvertsComponent} from "./views/adverts/adverts.component";
 import {ErrorComponent} from "./views/error/error.component";
+import {BrowserModule} from "@angular/platform-browser";
 
 const routes: Routes = [
   {path:'', canActivate:[AuthGuard], component:AdvertsComponent},
@@ -15,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), BrowserModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

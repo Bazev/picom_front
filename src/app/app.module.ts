@@ -9,10 +9,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AdvertsComponent } from './views/adverts/adverts.component';
 import { HeaderComponent } from './header/header.component';
 import {ErrorComponent} from "./views/error/error.component";
-import {AuthService} from "./sercices/auth.service";
+import {AuthService} from "./services/Auth/auth.service";
 import {AuthGuard} from "./guards/auth.guard";
 import localeFr from '@angular/common/locales/fr';
 import {registerLocaleData} from "@angular/common";
+import { AdvertsTableLineComponent } from './adverts-table-line/adverts-table-line.component';
+import { AdvertTableComponent } from './advert-table/advert-table.component';
+import {CommonModule} from '@angular/common';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -22,6 +25,8 @@ registerLocaleData(localeFr);
     AdvertsComponent,
     HeaderComponent,
     ErrorComponent,
+    AdvertsTableLineComponent,
+    AdvertTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +34,7 @@ registerLocaleData(localeFr);
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule
   ],
   providers: [AuthService, AuthGuard,
     { provide: LOCALE_ID, useValue: 'fr-FR'}],

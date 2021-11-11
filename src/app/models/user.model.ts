@@ -5,8 +5,9 @@ export class User {
   private _first_name: string;
   private _last_name: string;
   private _password: string;
+  private token :string;
 
-  constructor(email: string, password:string, first_name: string, last_name: string, id?: number) {
+  constructor(email: string, password:string, first_name: string, last_name: string, token:string, id?: number) {
     if (typeof id === 'number') {
       this._id = id;
     } else {
@@ -16,6 +17,7 @@ export class User {
     this._email = email;
     this._first_name = first_name;
     this._last_name = last_name;
+    this.token = token;
   }
 
 
@@ -67,6 +69,7 @@ export class User {
       userAsJson.first_name,
       userAsJson.last_name,
       userAsJson.id,
+      userAsJson.token
     );
   }
 

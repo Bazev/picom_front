@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../sercices/auth.service";
+import {AuthService} from "../../services/Auth/auth.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -12,19 +13,21 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
 
+
   constructor(private authService: AuthService, private router: Router) {
     this.email = "";
     this.password = "";
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() {
+    }
 
   onSubmitLoginForm(form: NgForm): void {
     if (form.valid) {
       this.authService
         .login(this.email, this.password)
-        .then(() => {
+        .pipe(first())
+        .subscribe(() => {
           this.router.navigateByUrl('adverts')
         })
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
-import {AuthService} from "../sercices/auth.service";
+import {AuthService} from "../services/Auth/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -17,21 +17,14 @@ export class HeaderComponent implements OnInit {
     this.tokenSub = new Subscription()
   }
 
-  ngOnInit(): void {
-    this.tokenSub = this.authService
-      .token
-      .subscribe((token:boolean)=>this.token = token)
-  }
-  ngOnDestroy() : void {
-    this.tokenSub.unsubscribe();
-  }
 
   onClickLogout() {
     this.authService
       .logout()
-      .then(()=>{
-        this.router.navigateByUrl('');
-      });
+
+  }
+
+  ngOnInit(): void {
   }
 
 }

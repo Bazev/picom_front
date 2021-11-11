@@ -1,1 +1,27 @@
-<p>adverts works!</p>
+<table class="table" *ngIf="adverts.length > 0">
+  <thead class="table-dark">
+  <tr>
+    <th>Id</th>
+    <th>Date Debut</th>
+    <th>Date Fin</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let advert of adverts">
+    <td>{{advert.id}}</td>
+    <td>{{advert.title}}</td>
+    <td>{{advert.dateStart}}</td>
+    <td>{{advert.dateEnd}}</td>
+    <td class="d-flex justify-content-between">
+      <div>
+        <button
+          class="btn btn-primary me-2">
+          DETAILS
+        </button>
+      </div>
+    </td>
+
+
+
+  </tr>
