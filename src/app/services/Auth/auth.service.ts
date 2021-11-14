@@ -9,14 +9,10 @@ import {User} from "../../models/user.model";
 export class AuthService {
   private currentUserSubject : BehaviorSubject<User>;
   public currentUser : Observable<User>
-  //token: BehaviorSubject<boolean>
-
-
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(<string>localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable()
-   // this.token = new BehaviorSubject<boolean>(false);
   }
 
   public get currentUserValue() : User {

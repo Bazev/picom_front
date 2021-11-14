@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {Advert} from "../../models/advert.model";
 import {AdvertService} from "../../services/adverts/advert.service";
 
@@ -10,12 +10,14 @@ import {AdvertService} from "../../services/adverts/advert.service";
 })
 export class AdvertsComponent implements OnInit {
   adverts: Array<Advert>
+    //adverts: Array<Advert>
   advertsSub: Subscription;
 
 
   constructor(private advertService: AdvertService) {
-    this.advertsSub = new Subscription();
     this.adverts = [];
+    this.advertsSub = new Subscription();
+
   }
 
   ngOnInit(): void {

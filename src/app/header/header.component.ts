@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from "rxjs";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {AuthService} from "../services/Auth/auth.service";
 import {Router} from "@angular/router";
+import {User} from "../models/user.model";
 
 @Component({
   selector: 'app-header',
@@ -9,22 +10,29 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  token:boolean;
-  tokenSub : Subscription;
+
+  currentUserSubject : BehaviorSubject<User>;
+  currentUser : Observable<User>
+  // token:boolean;
+  // tokenSub : Subscription;
 
   constructor(private authService:AuthService, private router:Router) {
-    this.token = false;
-    this.tokenSub = new Subscription()
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(<string>localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable()
+
+
+    // this.token = false;
+    // this.tokenSub = new Subscription()
   }
 
 
   onClickLogout() {
     this.authService
       .logout()
-
   }
 
   ngOnInit(): void {
+
   }
 
 }

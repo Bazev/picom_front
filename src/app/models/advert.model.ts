@@ -11,11 +11,11 @@ export class Advert {
   private _areas : Area;
   private _slotTime : SlotTime;
   private _title : string;
-  private _id: string |null;
+  private _id: number |null;
 
 
   constructor(dateCreate: Date, dateStart : Date,  dateEnd: Date, customer: User, areas: Area, slotTime: SlotTime, title: string, id?: number) {
-    if (typeof id === 'string') {
+    if (typeof id === 'number') {
       this._id = id;
     }else {
       this._id = null;
@@ -85,11 +85,11 @@ export class Advert {
     this._title = value;
   }
 
-  get id(): string | null {
+  get id(): number | null {
     return this._id;
   }
 
-  set id(value: string | null) {
+  set id(value: number | null) {
     this._id = value;
   }
 

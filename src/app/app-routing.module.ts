@@ -7,7 +7,7 @@ import {ErrorComponent} from "./views/error/error.component";
 import {BrowserModule} from "@angular/platform-browser";
 
 const routes: Routes = [
-  {path:'', canActivate:[AuthGuard], component:AdvertsComponent},
+  {path:'', component:LoginComponent},
   {path:'home', canActivate: [AuthGuard], component:AdvertsComponent},
   {path:'adverts', canActivate: [AuthGuard], component:AdvertsComponent},
   {path:'auth', component:LoginComponent},
