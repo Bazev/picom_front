@@ -1,31 +1,25 @@
 export class User {
 
-  private _id: number | null;
+  private _id: number;
   private _email: string;
   private _first_name: string;
   private _last_name: string;
   private _password: string;
-  private token :string;
 
-  constructor(email: string, password:string, first_name: string, last_name: string, token:string, id?: number) {
-    if (typeof id === 'number') {
-      this._id = id;
-    } else {
-      this._id = null;
-    }
+  constructor(email: string, password: string, first_name: string, last_name: string, id: number) {
+    this._id = id;
     this._password = password;
     this._email = email;
     this._first_name = first_name;
     this._last_name = last_name;
-    this.token = token;
   }
 
 
-  get id(): number | null {
+  get id(): number {
     return this._id;
   }
 
-  set id(value: number | null) {
+  set id(value: number) {
     this._id = value;
   }
 
@@ -69,14 +63,13 @@ export class User {
       userAsJson.first_name,
       userAsJson.last_name,
       userAsJson.id,
-      userAsJson.token
     );
   }
 
   toJson(): any {
     return {
       _email: this.email,
-      _password:this.password,
+      _password: this.password,
       _first_name: this.first_name,
       _last_name: this.last_name,
     };
