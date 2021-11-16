@@ -16,6 +16,7 @@ import {registerLocaleData} from "@angular/common";
 import { AdvertsTableLineComponent } from './adverts-table-line/adverts-table-line.component';
 import { AdvertTableComponent } from './advert-table/advert-table.component';
 import {CommonModule} from '@angular/common';
+import { SingleAdvertComponent } from './views/single-advert/single-advert.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -27,6 +28,7 @@ registerLocaleData(localeFr);
     ErrorComponent,
     AdvertsTableLineComponent,
     AdvertTableComponent,
+    SingleAdvertComponent,
   ],
   imports: [
     BrowserModule,

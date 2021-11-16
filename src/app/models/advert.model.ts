@@ -4,22 +4,17 @@ import {SlotTime} from "./slotTime.model";
 
 export class Advert {
 
-  private _dateCreate : Date;
-  private _dateStart : Date;
-  private _dateEnd : Date;
-  private _customer : User;
-  private _areas : Area;
-  private _slotTime : SlotTime;
-  private _title : string;
-  private _id: number |null;
+  private _dateCreate: Date;
+  private _dateStart: Date;
+  private _dateEnd: Date;
+  private _customer: User;
+  private _areas: Area;
+  private _slotTime: SlotTime;
+  private _title: string;
+  private _id: number | undefined;
 
 
-  constructor(dateCreate: Date, dateStart : Date,  dateEnd: Date, customer: User, areas: Area, slotTime: SlotTime, title: string, id?: number) {
-    if (typeof id === 'number') {
-      this._id = id;
-    }else {
-      this._id = null;
-    }
+  constructor(dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Area, slotTime: SlotTime, title: string, id: number) {
     this._dateCreate = dateCreate;
     this._dateStart = dateStart;
     this._dateEnd = dateEnd;
@@ -27,6 +22,7 @@ export class Advert {
     this._areas = areas;
     this._slotTime = slotTime;
     this._title = title;
+    this._id = id;
   }
 
   get dateCreate(): Date {
@@ -85,15 +81,15 @@ export class Advert {
     this._title = value;
   }
 
-  get id(): number | null {
+  get id(): number | undefined {
     return this._id;
   }
 
-  set id(value: number | null) {
+  set id(value: number | undefined) {
     this._id = value;
   }
 
-  static fromJson(advertAsJson : any) : Advert {
+  static fromJson(advertAsJson: any): Advert {
     return new Advert(
       advertAsJson.dateCreate,
       advertAsJson.dateStart,
@@ -101,19 +97,21 @@ export class Advert {
       advertAsJson.customer,
       advertAsJson.areas,
       advertAsJson.slotTime,
-      advertAsJson.content
+      advertAsJson.title,
+      advertAsJson.id,
     );
   }
 
-  toJson() : any {
+  toJson(): any {
     return {
-      _dateCreate : this.dateCreate,
-      _dateStart : this.dateStart,
-      _dateEnd : this.dateEnd,
-      _customer : this.customer,
-      _areas : this.areas,
-      _slotTime : this.slotTime,
-      _content : this.title
+      _dateCreate: this.dateCreate,
+      _dateStart: this.dateStart,
+      _dateEnd: this.dateEnd,
+      _customer: this.customer,
+      _areas: this.areas,
+      _slotTime: this.slotTime,
+      _content: this.title,
+      _id:this.id,
     }
   }
 

@@ -21,25 +21,25 @@ export class AdvertService {
   }
 
   getAdverts() {
-   // const id = this.authService.currentUserValue.id
+   const id = this.authService.currentUserValue.id
     console.log(this.currentUser)
     this.http
-      .get('http://localhost:8080/ws/customer/1/adverts')
+      .get('http://localhost:8080/ws/customer/'+id+'/adverts')
       .pipe(
-        map((data: any) => data.adverts.map((advertAsJson: any) => Advert.fromJson(advertAsJson))))
+        map((data: any) => data.map((data: any) => Advert.fromJson(data))))
       .toPromise()
       .then((adverts: Array<Advert>) => {
         this.adverts.next(adverts);
       })
   }
 
-  // getAdvertsByCustomer(identifiant : string) : Promise<Array<Advert>> {
-  //   const identifiant = this.currentUser.id
-  //   return this.http
-  //     .get('http://localhost:8080/ws/customer/' + identifiant + '/adverts')
-  //     .pipe(
-  //       map((data: any) => data.adverts.map((advertAsJson: any) => Advert.fromJson(advertAsJson))))
-  //     .toPromise();
-  // }
+  getAdvertById(id : number) : Promise<Advert> {
+   return this.http
+      .get('http://localhost:8080/ws/advert/'+id)
+      .pipe(
+        map((data:any) => Advert.fromJson(data)))
+      .toPromise()
+     .then();
+  }
 
 }

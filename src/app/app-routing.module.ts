@@ -5,11 +5,13 @@ import {AuthGuard} from "./guards/auth.guard";
 import {AdvertsComponent} from "./views/adverts/adverts.component";
 import {ErrorComponent} from "./views/error/error.component";
 import {BrowserModule} from "@angular/platform-browser";
+import {SingleAdvertComponent} from "./views/single-advert/single-advert.component";
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
   {path:'home', canActivate: [AuthGuard], component:AdvertsComponent},
   {path:'adverts', canActivate: [AuthGuard], component:AdvertsComponent},
+  {path:'adverts/:id', component:SingleAdvertComponent},
   {path:'auth', component:LoginComponent},
   {path: 'not-found', component: ErrorComponent},
   {path: '**', redirectTo: 'not-found'}
