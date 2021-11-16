@@ -15,8 +15,9 @@ export class SingleAdvertComponent implements OnInit {
   constructor(private advertService:AdvertService, private route:ActivatedRoute, private router:Router) {
   }
 
+
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
+    const id : number = this.route.snapshot.params['id'];
     this.advertService
       .getAdvertById(id)
       .then((advert:Advert) => this.advert = advert);

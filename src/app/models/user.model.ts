@@ -1,29 +1,25 @@
 export class User {
 
-  private _id: number | null;
+  private _id: number;
   private _email: string;
   private _first_name: string;
   private _last_name: string;
   private _password: string;
 
-  constructor(email: string, password: string, first_name: string, last_name: string, id?: number) {
-    if (typeof id === 'number') {
-      this._id = id
-    } else {
-      this._id = null
-    }
+  constructor(email: string, password: string, first_name: string, last_name: string, id: number) {
     this._password = password;
     this._email = email;
     this._first_name = first_name;
     this._last_name = last_name;
+    this._id = id;
   }
 
 
-  get id(): number | null{
+  get id(): number{
     return this._id;
   }
 
-  set id(value: number | null) {
+  set id(value: number) {
     this._id = value;
   }
 

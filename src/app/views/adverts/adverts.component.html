@@ -8,23 +8,21 @@
   <table class="table" >
     <thead class="table-dark">
     <tr>
-      <th>Id</th>
       <th>Titre</th>
       <th>Date Debut</th>
       <th>Date Fin</th>
       <th>Actions</th>
     </tr>
     </thead>
-    <tbody >
+    <tbody>
     <tr *ngFor="let advert of adverts">
-      <td>{{advert.id}}</td>
       <td>{{advert.title}}</td>
       <td>{{advert.dateStart}}</td>
       <td>{{advert.dateEnd}}</td>
       <td class="d-flex justify-content-between">
         <div>
           <button
-            [routerLink]="['/advert',id]"
+            [routerLink]="['/adverts', advert.id]"
             class="btn btn-primary me-2">
             DETAILS
           </button>
