@@ -4,14 +4,10 @@ export class SlotTime {
 
   private _start : number;
   private _adverts : Advert;
-  private _id : number | null;
+  private _id : number | undefined;
 
-  constructor(start: number, adverts: Advert, id?: number) {
-    if (typeof id === 'number') {
-      this._id = id;
-    }else {
-      this._id = null;
-    }
+  constructor(start: number, adverts: Advert, id: number) {
+   this._id = id;
     this._start = start;
     this._adverts = adverts;
   }
@@ -32,11 +28,11 @@ export class SlotTime {
     this._adverts = value;
   }
 
-  get id(): number | null {
+  get id(): number | undefined {
     return this._id;
   }
 
-  set id(value: number | null) {
+  set id(value: number | undefined) {
     this._id = value;
   }
 }

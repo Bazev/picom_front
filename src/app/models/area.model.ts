@@ -1,15 +1,11 @@
 export class Area {
 
   private _name:string;
-  private _id : number | null;
+  private _id : number | undefined;
 
 
-  constructor(name: string, id?: number) {
-    if (typeof id === 'number') {
-      this._id = id;
-    }else {
-      this._id = null;
-    }
+  constructor(name: string, id: number) {
+  this._id = id;
     this._name = name;
   }
 
@@ -21,11 +17,12 @@ export class Area {
     this._name = value;
   }
 
-  get id(): number | null {
+  get id(): number | undefined {
     return this._id;
   }
 
-  set id(value: number | null) {
+  set id(value: number | undefined) {
     this._id = value;
   }
+
 }

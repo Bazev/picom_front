@@ -1,8 +1,11 @@
-<div *ngIf="advert" class="row col-6 card shadow mx-auto my-5 py-2">
+<div class="px-4 py-3 text-center">
+
+<div *ngIf="advert" class="col-11 offset-1 card shadow mx-auto my-5 py-2">
 <div class="card-body">
   <h2 class="card-title text-center">{{advert.title}}</h2>
   <p class="card-text">Date de début :{{advert.dateStart}}</p>
   <p class="card-text">Date de fin de diffusion :{{advert.dateEnd}}</p>
+  
 </div>
-
+</div>
 </div>

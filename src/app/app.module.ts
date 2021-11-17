@@ -13,8 +13,6 @@ import {AuthService} from "./services/Auth/auth.service";
 import {AuthGuard} from "./guards/auth.guard";
 import localeFr from '@angular/common/locales/fr';
 import {registerLocaleData} from "@angular/common";
-import { AdvertsTableLineComponent } from './adverts-table-line/adverts-table-line.component';
-import { AdvertTableComponent } from './advert-table/advert-table.component';
 import {CommonModule} from '@angular/common';
 import { SingleAdvertComponent } from './views/single-advert/single-advert.component';
 registerLocaleData(localeFr);
@@ -26,8 +24,6 @@ registerLocaleData(localeFr);
     AdvertsComponent,
     HeaderComponent,
     ErrorComponent,
-    AdvertsTableLineComponent,
-    AdvertTableComponent,
     SingleAdvertComponent,
   ],
   imports: [
