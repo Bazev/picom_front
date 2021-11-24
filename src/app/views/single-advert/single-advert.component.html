@@ -1,11 +1,18 @@
 <div class="px-4 py-3 text-center">
 
-<div *ngIf="advert" class="col-11 offset-1 card shadow mx-auto my-5 py-2">
-<div class="card-body">
-  <h2 class="card-title text-center">{{advert.title}}</h2>
-  <p class="card-text">Date de début :{{advert.dateStart}}</p>
-  <p class="card-text">Date de fin de diffusion :{{advert.dateEnd}}</p>
-  
-</div>
-</div>
+  <div *ngIf="advert" class="col-11 offset-1 card shadow mx-auto my-5 py-2">
+    <div class="card-body">
+      <h2 class="card-title text-center">{{advert.title}}</h2>
+      <p class="card-text">Date de début :{{advert.dateStart}}</p>
+      <p class="card-text">Date de fin de diffusion :{{advert.dateEnd}}</p>
+
+      <div app-area
+           *ngFor="let area of advert.areas"
+      [name]="area.name">
+      </div>
+      <div app-slot-time
+      *ngFor="let slot of advert.slotTime"
+      [start]="slot.start"></div>
+    </div>
+  </div>
 </div>

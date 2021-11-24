@@ -7,8 +7,9 @@ export class AdvertHtml extends Advert {
 
   private _content : string;
 
-  constructor(dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Area, slotTime: SlotTime, title: string, id: number, content: string) {
-    super(dateCreate, dateStart, dateEnd, customer, areas, slotTime, title, id);
+
+  constructor(title: string, dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Array<Area>, slotTime: Array<SlotTime>, id: number | undefined, content: string) {
+    super(title, dateCreate, dateStart, dateEnd, customer, areas, slotTime, id);
     this._content = content;
   }
 }

@@ -15,6 +15,8 @@ import localeFr from '@angular/common/locales/fr';
 import {registerLocaleData} from "@angular/common";
 import {CommonModule} from '@angular/common';
 import { SingleAdvertComponent } from './views/single-advert/single-advert.component';
+import { AreaComponent } from './components/area/area.component';
+import { SlotTimeComponent } from './components/slot-time/slot-time.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -25,6 +27,8 @@ registerLocaleData(localeFr);
     HeaderComponent,
     ErrorComponent,
     SingleAdvertComponent,
+    AreaComponent,
+    SlotTimeComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,9 +4,9 @@ export class Area {
   private _id : number | undefined;
 
 
-  constructor(name: string, id: number) {
-  this._id = id;
+  constructor(name: string, id: number | undefined) {
     this._name = name;
+    this._id = id;
   }
 
   get name(): string {
@@ -24,5 +24,21 @@ export class Area {
   set id(value: number | undefined) {
     this._id = value;
   }
+
+  static fromJson(areaAsJson:any): Area {
+    return new Area(
+      areaAsJson.name,
+      areaAsJson.id,
+    );
+  }
+
+  toJson() : any {
+    return {
+      _name:this.name,
+      _id:this.id,
+    };
+  }
+
+
 
 }

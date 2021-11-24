@@ -4,24 +4,25 @@ import {SlotTime} from "./slotTime.model";
 
 export class Advert {
 
+  private _title:string;
   private _dateCreate: Date;
   private _dateStart: Date;
   private _dateEnd: Date;
   private _customer: User;
-  private _areas: Area;
-  private _slotTime: SlotTime;
-  private _title: string;
+  private _areas: Array<Area>;
+  private _slotTime: Array<SlotTime>
   private _id: number | undefined;
 
 
-  constructor(dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Area, slotTime: SlotTime, title: string, id: number) {
+  constructor(title: string, dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Array<Area>,
+              slotTime: Array<SlotTime>, id: number | undefined) {
+    this._title = title;
     this._dateCreate = dateCreate;
     this._dateStart = dateStart;
     this._dateEnd = dateEnd;
     this._customer = customer;
     this._areas = areas;
     this._slotTime = slotTime;
-    this._title = title;
     this._id = id;
   }
 
@@ -57,19 +58,20 @@ export class Advert {
     this._customer = value;
   }
 
-  get areas(): Area {
+
+  get areas(): Array<Area> {
     return this._areas;
   }
 
-  set areas(value: Area) {
+  set areas(value: Array<Area>) {
     this._areas = value;
   }
 
-  get slotTime(): SlotTime {
+  get slotTime(): Array<SlotTime> {
     return this._slotTime;
   }
 
-  set slotTime(value: SlotTime) {
+  set slotTime(value: Array<SlotTime>) {
     this._slotTime = value;
   }
 
@@ -91,13 +93,13 @@ export class Advert {
 
   static fromJson(advertAsJson: any): Advert {
     return new Advert(
+      advertAsJson.title,
       advertAsJson.dateCreate,
       advertAsJson.dateStart,
       advertAsJson.dateEnd,
       advertAsJson.customer,
       advertAsJson.areas,
       advertAsJson.slotTime,
-      advertAsJson.title,
       advertAsJson.id,
     );
   }

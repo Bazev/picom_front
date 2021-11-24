@@ -5,7 +5,8 @@ import {SlotTime} from "./slotTime.model";
 
 export class AdvertPicture extends Advert {
 
-  constructor(dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Area, slotTime: SlotTime, content: string, id: number) {
-    super(dateCreate, dateStart, dateEnd, customer, areas, slotTime, content, id);
+
+  constructor(title: string, dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Array<Area>, slotTime: Array<SlotTime>, id: number | undefined) {
+    super(title, dateCreate, dateStart, dateEnd, customer, areas, slotTime, id);
   }
 }
