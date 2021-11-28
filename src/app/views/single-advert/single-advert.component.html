@@ -6,13 +6,21 @@
       <p class="card-text">Date de début :{{advert.dateStart}}</p>
       <p class="card-text">Date de fin de diffusion :{{advert.dateEnd}}</p>
 
-      <div app-area
-           *ngFor="let area of advert.areas"
-      [name]="area.name">
+      <div class="card-body">
+        <h5 class="card-title">Zones de diffusion:</h5>
+        <div class="card-text" *ngFor="let zone of advert.areas">
+          <p class="card-text">{{zone.name}} :
+            <span *ngFor="let arret of zone.arrets"> {{arret.name}}
+				</span></p>
+        </div>
       </div>
-      <div app-slot-time
-      *ngFor="let slot of advert.slotTime"
-      [start]="slot.start"></div>
+
+      <div class="card-body">
+        <h5 class="card-title">Créneau Horraires </h5>
+        <div class="card-text" *ngFor="let slot of advert.slotTimes">
+          <p class="card-text">{{slot.start}} H</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

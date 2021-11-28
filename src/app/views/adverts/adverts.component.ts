@@ -4,6 +4,8 @@ import {Advert} from "../../models/advert.model";
 import {AdvertService} from "../../services/adverts/advert.service";
 import {ActivatedRoute} from "@angular/router";
 import {Area} from "../../models/area.model";
+import {SlotTime} from "../../models/slotTime.model";
+import {Arret} from "../../models/arret";
 
 @Component({
   selector: 'app-adverts',
@@ -15,12 +17,10 @@ export class AdvertsComponent implements OnInit {
   @Input() id:number;
   adverts: Array<Advert>;
   advertsSub: Subscription;
-  areas:Array<Area>
 
-  constructor(private advertService: AdvertService, private route:ActivatedRoute) {
+  constructor(private advertService: AdvertService) {
     this.id = 0;
     this.adverts = [];
-    this.areas = [];
     this.advertsSub = new Subscription();
   }
 
@@ -28,7 +28,6 @@ export class AdvertsComponent implements OnInit {
     this.advertsSub = this.advertService
       .adverts
       .subscribe(adverts => {
-        console.log(adverts);
         this.adverts = adverts
       })
   }

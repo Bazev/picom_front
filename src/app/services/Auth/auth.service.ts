@@ -25,7 +25,7 @@ export class AuthService {
         'Access-Control-Allow-Origin': '*'
       })
     }
-    return this.http.post<any>('http://localhost:8080/ws/login/' + email + '/' + password, options)
+    return this.http.post<any>('https://picom.herokuapp.com/ws/login/' + email + '/' + password, options)
       .pipe(map(user => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);

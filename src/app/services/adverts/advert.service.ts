@@ -24,7 +24,7 @@ export class AdvertService {
    const id = this.authService.currentUserValue.id
     console.log(this.currentUser)
     this.http
-      .get('http://localhost:8080/ws/customer/'+id+'/adverts')
+      .get('https://picom.herokuapp.com/ws/customer/'+id+'/adverts')
       .pipe(
         map((data: any) => data.map((data: any) => Advert.fromJson(data))))
       .toPromise()
@@ -35,7 +35,7 @@ export class AdvertService {
 
   getAdvertById(id : number) : Promise<Advert> {
    return this.http
-      .get('http://localhost:8080/ws/advert/'+id)
+      .get('https://picom.herokuapp.com/ws/advert/'+id)
       .pipe(
         map((data:any) => Advert.fromJson(data)))
       .toPromise()

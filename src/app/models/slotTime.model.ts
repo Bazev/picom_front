@@ -6,8 +6,8 @@ export class SlotTime {
   private _id: number | undefined;
 
   constructor(start: number, id: number) {
-    this._id = id;
     this._start = start;
+    this._id = id;
   }
 
   get start(): number {
@@ -26,17 +26,18 @@ export class SlotTime {
     this._id = value;
   }
 
-  static fromJson(slotTimeAsJson: any): SlotTime {
-    return new SlotTime(
-      slotTimeAsJson.id,
-      slotTimeAsJson.start,
-    );
-  }
+  // static fromJson(slotTimeAsJson: any): SlotTime {
+  //   return new SlotTime(
+  //     slotTimeAsJson.start,
+  //     slotTimeAsJson.id
+  //   )
+  // }
+
   toJson(): any {
     return {
-      _id : this.id,
-      _start : this.start,
-    };
+      _start:this.start,
+      _id:this.id
+    }
   }
 
 }

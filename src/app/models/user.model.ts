@@ -62,7 +62,7 @@ export class User {
       userAsJson.password,
       userAsJson.first_name,
       userAsJson.last_name,
-      userAsJson._id,
+      userAsJson._id
     );
   }
 
@@ -71,7 +71,7 @@ export class User {
       _email: this.email,
       _password: this.password,
       _first_name: this.first_name,
-      _last_name: this.last_name,
+      _last_name: this.last_name
     };
   }
 }

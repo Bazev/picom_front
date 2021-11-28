@@ -1,6 +1,5 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from "./views/login/login.component";
@@ -15,8 +14,8 @@ import localeFr from '@angular/common/locales/fr';
 import {registerLocaleData} from "@angular/common";
 import {CommonModule} from '@angular/common';
 import { SingleAdvertComponent } from './views/single-advert/single-advert.component';
-import { AreaComponent } from './components/area/area.component';
-import { SlotTimeComponent } from './components/slot-time/slot-time.component';
+import { AddAdvertComponent } from './views/add-advert/add-advert.component';
+import {MatListModule} from "@angular/material/list";
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -27,8 +26,7 @@ registerLocaleData(localeFr);
     HeaderComponent,
     ErrorComponent,
     SingleAdvertComponent,
-    AreaComponent,
-    SlotTimeComponent,
+    AddAdvertComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,10 +34,12 @@ registerLocaleData(localeFr);
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatListModule,
   ],
   providers: [AuthService, AuthGuard,
     { provide: LOCALE_ID, useValue: 'fr-FR'}],
+
   bootstrap: [AppComponent]
 })
 

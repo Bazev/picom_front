@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SlotTimeComponent } from './slot-time.component';
+import { AddAdvertComponent } from './add-advert.component';
 
-describe('SlotTimeComponent', () => {
-  let component: SlotTimeComponent;
-  let fixture: ComponentFixture<SlotTimeComponent>;
+describe('AddAdvertComponent', () => {
+  let component: AddAdvertComponent;
+  let fixture: ComponentFixture<AddAdvertComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SlotTimeComponent ]
+      declarations: [ AddAdvertComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SlotTimeComponent);
+    fixture = TestBed.createComponent(AddAdvertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

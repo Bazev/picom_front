@@ -1,0 +1,36 @@
+<div class="row col-6  shadow mx-auto mt-3">
+
+<!--    <div class="mb-3">-->
+<!--      <label for="title">Titre de l'annonce</label>-->
+<!--      <input-->
+<!--      id="title"-->
+<!--      class="form-control"-->
+<!--      [(ngModel)]="advert.title">-->
+<!--    </div>-->
+
+<!--    <div class="mb-3">-->
+<!--      <label for="dateBegin">Date de début de diffusion</label>-->
+<!--      <input type="date"-->
+<!--        id="dateBegin"-->
+<!--        class="form-control"-->
+<!--        [(ngModel)]="advert.dateStart">-->
+<!--    </div>-->
+
+<!--    <div class="mb-3">-->
+<!--      <label for="dateEnd">Date de Fin de diffusion</label>-->
+<!--      <input type="date"-->
+<!--        id="dateEnd"-->
+<!--        class="form-control"-->
+<!--        [(ngModel)]="advert.dateEnd">-->
+<!--    </div>-->
+
+  <mat-selection-list #areas>
+    <mat-list-option *ngFor="let area of listAreas">
+  <p class="area"> {{area.name}}</p>
+    </mat-list-option>
+  </mat-selection-list>
+  <p>
+    Options selected: {{areas.selectedOptions.selected.length}}
+  </p>
+</div>
+

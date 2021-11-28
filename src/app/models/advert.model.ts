@@ -1,6 +1,7 @@
 import {User} from "./user.model";
 import {Area} from "./area.model";
 import {SlotTime} from "./slotTime.model";
+import {Arret} from "./arret";
 
 export class Advert {
 
@@ -10,20 +11,22 @@ export class Advert {
   private _dateEnd: Date;
   private _customer: User;
   private _areas: Array<Area>;
-  private _slotTime: Array<SlotTime>
+  private _slotTimes: Array<SlotTime>;
+  private _arrets:Array<Arret>
   private _id: number | undefined;
 
 
-  constructor(title: string, dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Array<Area>,
-              slotTime: Array<SlotTime>, id: number | undefined) {
+  constructor(id: number | undefined, title: string, dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Array<Area>,
+              slotTimes: Array<SlotTime>, arrets:Array<Arret>) {
+    this._id = id;
     this._title = title;
     this._dateCreate = dateCreate;
     this._dateStart = dateStart;
     this._dateEnd = dateEnd;
     this._customer = customer;
     this._areas = areas;
-    this._slotTime = slotTime;
-    this._id = id;
+    this._slotTimes = slotTimes;
+    this._arrets = arrets
   }
 
   get dateCreate(): Date {
@@ -67,12 +70,12 @@ export class Advert {
     this._areas = value;
   }
 
-  get slotTime(): Array<SlotTime> {
-    return this._slotTime;
+  get slotTimes(): Array<SlotTime> {
+    return this._slotTimes;
   }
 
-  set slotTime(value: Array<SlotTime>) {
-    this._slotTime = value;
+  set slotTimes(value: Array<SlotTime>) {
+    this._slotTimes = value;
   }
 
   get title(): string {
@@ -90,30 +93,39 @@ export class Advert {
   set id(value: number | undefined) {
     this._id = value;
   }
+  get arrets(): Array<Arret> {
+    return this._arrets;
+  }
+
+  set arrets(value: Array<Arret>) {
+    this._arrets = value;
+  }
 
   static fromJson(advertAsJson: any): Advert {
     return new Advert(
+      advertAsJson.id,
       advertAsJson.title,
       advertAsJson.dateCreate,
       advertAsJson.dateStart,
       advertAsJson.dateEnd,
       advertAsJson.customer,
       advertAsJson.areas,
-      advertAsJson.slotTime,
-      advertAsJson.id,
-    );
+      advertAsJson.slotTimes,
+      advertAsJson.arrets
+    )
   }
 
   toJson(): any {
     return {
+      _id:this.id,
+      _content: this.title,
       _dateCreate: this.dateCreate,
       _dateStart: this.dateStart,
       _dateEnd: this.dateEnd,
       _customer: this.customer,
       _areas: this.areas,
-      _slotTime: this.slotTime,
-      _content: this.title,
-      _id:this.id,
+      _slotTimes: this.slotTimes,
+      _arrets:this.arrets
     }
   }
 
