@@ -16,7 +16,14 @@ import {CommonModule} from '@angular/common';
 import { SingleAdvertComponent } from './views/single-advert/single-advert.component';
 import { AddAdvertComponent } from './views/add-advert/add-advert.component';
 import {MatListModule} from "@angular/material/list";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatInputModule} from "@angular/material/input";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatSliderModule} from "@angular/material/slider";
 registerLocaleData(localeFr);
+
 
 @NgModule({
   declarations: [
@@ -36,8 +43,14 @@ registerLocaleData(localeFr);
     ReactiveFormsModule,
     CommonModule,
     MatListModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
   ],
-  providers: [AuthService, AuthGuard,
+  providers: [AuthService, AuthGuard,MatDatepickerModule,
     { provide: LOCALE_ID, useValue: 'fr-FR'}],
 
   bootstrap: [AppComponent]
