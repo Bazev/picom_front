@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./views/login/login.component";
 import {AuthGuard} from "./guards/auth.guard";
@@ -12,7 +12,7 @@ const routes: Routes = [
   {path:'home', canActivate: [AuthGuard], component:AdvertsComponent},
   {path:'adverts', canActivate: [AuthGuard], component:AdvertsComponent},
   {path:'adverts/:id', component:SingleAdvertComponent},
-  {path: 'advert/add', canActivate:[AuthGuard], component:AddAdvertComponent},
+  {path:'advert/add', canActivate:[AuthGuard], component:AddAdvertComponent},
   {path:'auth', component:LoginComponent},
   {path: 'not-found', component: ErrorComponent},
   {path: '**', redirectTo: 'not-found'}

@@ -20,16 +20,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    }
+  }
 
   onSubmitLoginForm(form: NgForm): void {
     if (form.valid) {
       this.authService
         .login(this.email, this.password)
-        .pipe(first())
-        .subscribe(() => {
+        .then(() => {
           this.router.navigateByUrl('adverts')
         })
     }
-  }
+  };
+
+
 }

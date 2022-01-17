@@ -1,4 +1,3 @@
-import {User} from "./user.model";
 import {Area} from "./area.model";
 import {SlotTime} from "./slotTime.model";
 import {Arret} from "./arret";
@@ -6,35 +5,27 @@ import {Arret} from "./arret";
 export class Advert {
 
   private _title:string;
-  private _dateCreate: Date;
   private _dateStart: Date;
   private _dateEnd: Date;
-  private _customer: User;
+  private _customer: number;
   private _areas: Array<Area>;
   private _slotTimes: Array<SlotTime>;
-  private _arrets:Array<Arret>
-  private _id: number | undefined;
+  private _id: number | null;
 
 
-  constructor(id: number | undefined, title: string, dateCreate: Date, dateStart: Date, dateEnd: Date, customer: User, areas: Array<Area>,
-              slotTimes: Array<SlotTime>, arrets:Array<Arret>) {
-    this._id = id;
+  constructor(title: string, dateStart: Date, dateEnd: Date, customer: number, areas: Array<Area>,
+              slotTimes: Array<SlotTime>, id? :number) {
+    if (typeof id === 'number') {
+      this._id = id;
+    } else {
+      this._id = null;
+    }
     this._title = title;
-    this._dateCreate = dateCreate;
     this._dateStart = dateStart;
     this._dateEnd = dateEnd;
     this._customer = customer;
     this._areas = areas;
     this._slotTimes = slotTimes;
-    this._arrets = arrets
-  }
-
-  get dateCreate(): Date {
-    return this._dateCreate;
-  }
-
-  set dateCreate(value: Date) {
-    this._dateCreate = value;
   }
 
   get dateStart(): Date {
@@ -53,11 +44,11 @@ export class Advert {
     this._dateEnd = value;
   }
 
-  get customer(): User {
+  get customer(): number {
     return this._customer;
   }
 
-  set customer(value: User) {
+  set customer(value: number) {
     this._customer = value;
   }
 
@@ -86,46 +77,35 @@ export class Advert {
     this._title = value;
   }
 
-  get id(): number | undefined {
+  get id(): number | null {
     return this._id;
   }
 
-  set id(value: number | undefined) {
+  set id(value: number | null) {
     this._id = value;
   }
-  get arrets(): Array<Arret> {
-    return this._arrets;
-  }
 
-  set arrets(value: Array<Arret>) {
-    this._arrets = value;
-  }
 
   static fromJson(advertAsJson: any): Advert {
     return new Advert(
-      advertAsJson.id,
       advertAsJson.title,
-      advertAsJson.dateCreate,
       advertAsJson.dateStart,
       advertAsJson.dateEnd,
       advertAsJson.customer,
       advertAsJson.areas,
       advertAsJson.slotTimes,
-      advertAsJson.arrets
+      advertAsJson.id
     )
   }
 
   toJson(): any {
     return {
-      _id:this.id,
-      _content: this.title,
-      _dateCreate: this.dateCreate,
+      _title: this.title,
       _dateStart: this.dateStart,
       _dateEnd: this.dateEnd,
       _customer: this.customer,
       _areas: this.areas,
       _slotTimes: this.slotTimes,
-      _arrets:this.arrets
     }
   }
 

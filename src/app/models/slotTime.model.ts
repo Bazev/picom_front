@@ -35,9 +35,15 @@ export class SlotTime {
 
   toJson(): any {
     return {
-      _start:this.start,
-      _id:this.id
+      _start: this.start,
+      _id: this.id
     }
   }
 
+  static fromJson(slotAsJson: any): SlotTime {
+    return new SlotTime(
+    slotAsJson.start,
+      slotAsJson.id
+    )
+  }
 }

@@ -1,17 +1,11 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
   <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/">Home</a>
     <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    <a class="nav-item nav-link" routerLink="adverts">Mes annonces</a>
+    <a class="nav-item nav-link" routerLink="advert/add">Ajouter une annonce</a>
+
   </div>
 </nav>
 
-<div class="jumbotron">
-  <div class="container">
-    <div class="row">
-
-        <router-outlet></router-outlet>
-
-      </div>
-    </div>
-</div>
+      <router-outlet></router-outlet>
 

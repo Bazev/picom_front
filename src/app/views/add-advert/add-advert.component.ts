@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Area} from "../../models/area.model";
-import {Subscription} from "rxjs";
-import {AreaService} from "../../services/areas/area.service";
+import {Advert} from "../../models/advert.model";
+import {AdvertService} from "../../services/adverts/advert.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-advert',
@@ -9,19 +9,21 @@ import {AreaService} from "../../services/areas/area.service";
   styleUrls: ['./add-advert.component.css']
 })
 export class AddAdvertComponent implements OnInit {
-  listAreas: Array<Area>;
-  areasSub: Subscription;
 
-  constructor(private areaService: AreaService) {
-    this.listAreas = [];
-    this.areasSub = new Subscription();
+
+  constructor(private advertService:AdvertService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.areasSub = this.areaService
-      .areas
-      .subscribe(areas =>{
-        this.listAreas = areas
-      })
+  }
+
+
+  onSubmitAddAdvert(advert: Advert): void {
+    this.advertService
+      .save(advert)
+      .then(() => {
+        this.router.navigateByUrl('adverts')
+      });
+
   }
 }
