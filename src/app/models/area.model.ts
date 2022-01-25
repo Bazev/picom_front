@@ -2,23 +2,31 @@ import {Arret} from "./arret";
 
 export class Area {
 
-name:string;
+private _name:string;
 id: number | undefined;
-arrets: Array<Arret>;
+private _arrets: Array<Arret>;
 
 
   constructor(name: string, id: number | undefined, arrets:Array<Arret>) {
-    this.name = name;
+    this._name = name;
     this.id = id;
-    this.arrets = arrets;
+    this._arrets = arrets;
   }
 
 
-static fromJson(areaAsJson:any): Area {
+  get name(): string {
+    return this._name;
+  }
+
+  get arrets(): Array<Arret> {
+    return this._arrets;
+  }
+
+  static fromJson(areaAsJson:any): Area {
     return new Area(
-      areaAsJson.name,
+      areaAsJson._name,
       areaAsJson.id,
-      areaAsJson.arrets
+      areaAsJson._arrets
     )
   }
 

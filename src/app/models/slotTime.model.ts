@@ -1,14 +1,19 @@
 export class SlotTime {
 
-start: number;
+private _start: number;
 
   constructor(start: number) {
-    this.start = start;
+    this._start = start;
+  }
+
+
+  get start(): number {
+    return this._start;
   }
 
   static fromJson(slotAsJson: any): SlotTime {
     return new SlotTime(
-    slotAsJson.start,
+    slotAsJson._start,
     )
   }
 }

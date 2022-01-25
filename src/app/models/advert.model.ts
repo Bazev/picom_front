@@ -22,6 +22,8 @@ export class Advert {
     this.slotTimes = slotTimes;
   }
 
+
+
   static fromJson(advertAsJson: any): Advert {
     return new Advert(
       advertAsJson.dateStart,
