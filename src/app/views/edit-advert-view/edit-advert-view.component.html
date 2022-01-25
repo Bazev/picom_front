@@ -1,0 +1,8 @@
+<app-advert-form
+  *ngIf="advert"
+  title="Édition d'une annonce"
+  submitLabel="Modifier"
+  [advertToEdit]="advert"
+  (formSubmitted)="editionAnnonce($event)">
+</app-advert-form>
+

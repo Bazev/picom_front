@@ -30,6 +30,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdvertFormComponent} from './components/advert-form/advert-form.component';
 import {HttpErrorHandler} from "./http-error-handler.service";
 import {MessageService} from "./message.service";
+import { EditAdvertViewComponent } from './views/edit-advert-view/edit-advert-view.component';
+import { AddAdvertViewComponent } from './views/add-advert-view/add-advert-view.component';
 
 registerLocaleData(localeFr);
 
@@ -43,6 +45,8 @@ registerLocaleData(localeFr);
     ErrorComponent,
     SingleAdvertComponent,
     AdvertFormComponent,
+    EditAdvertViewComponent,
+    AddAdvertViewComponent,
   ],
 
   imports: [

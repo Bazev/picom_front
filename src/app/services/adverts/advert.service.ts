@@ -1,13 +1,10 @@
 import {Injectable} from '@angular/core';
-import {catchError, map, Observable} from "rxjs";
+import {BehaviorSubject, catchError, identity, map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Advert} from "../../models/advert.model";
 import {AuthService} from "../Auth/auth.service";
 import {User} from "../../models/user.model";
 import {HandleError, HttpErrorHandler} from "../../http-error-handler.service";
-
-const BASEURL = 'https://picom.herokuapp.com/ws/';
-
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,15 +20,18 @@ export class AdvertService {
   currentUser: User;
   handleError: HandleError;
 
+  annonces: BehaviorSubject<Array<Advert>>;
+
 
   constructor(private http: HttpClient, private authService: AuthService, httpErrorHandler: HttpErrorHandler) {
     this.handleError = httpErrorHandler.createHandleError('advertService')
     this.currentUser = this.authService.currentUserValue;
     this.getAdverts()
+    this.annonces = new BehaviorSubject<Array<Advert>>([]);
 
   }
 
-  getAdverts() : Observable<Advert[]>{
+  getAdverts(): Observable<Advert[]> {
     const id = this.authService.currentUserValue.id
     return this.http
       .get<Advert[]>('https://picom.herokuapp.com/ws/customer/' + id + '/adverts')
@@ -40,21 +40,41 @@ export class AdvertService {
       );
   }
 
-  getAdvertById(id : number) : Promise<Advert> {
+  getAdvertById(id: number): Promise<Advert> {
     return this.http
-      .get('https://picom.herokuapp.com/ws/advert/'+id)
+      .get('https://picom.herokuapp.com/ws/advert/' + id)
       .pipe(
-        map((data:any) => Advert.fromJson(data)))
+        map((data: any) => Advert.fromJson(data)))
       .toPromise()
       .then();
   }
 
-  addAdvert(advert:Advert) : Observable<Advert> {
+  addAdvert(advert: Advert): Observable<Advert> {
     const id = this.authService.currentUserValue.id
-    return this.http.post<Advert>('https://picom.herokuapp.com/ws/' +'advert/' + id ,  JSON.stringify(advert), httpOptions)
+    return this.http.post<Advert>('https://picom.herokuapp.com/ws/' + 'advert/' + id, JSON.stringify(advert), httpOptions)
       .pipe(
         catchError(this.handleError('addAdvert', advert))
       );
   }
 
+  modifierAnnonce(annonceModifie: Advert): Promise<void> {
+    return new Promise<void>(
+      (resolve, rej) => {
+        setTimeout(() => {
+          const adverts = this.annonces.getValue()
+          adverts.push(annonceModifie)
+
+          for (const [index, annonce] of adverts.entries()) {
+            if (annonce.id === annonceModifie.id) {
+              adverts[index] = annonceModifie;
+            }
+          }
+          this.annonces.next(adverts)
+          return this.http
+            .post('https://picom.herokuapp.com/ws/advert'+ annonceModifie.id + JSON.stringify(annonceModifie), httpOptions)
+            .toPromise()
+        })
+      }
+    )
+  }
 }

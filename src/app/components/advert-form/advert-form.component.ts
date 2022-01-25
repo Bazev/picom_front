@@ -14,10 +14,11 @@ import {AdvertService} from "../../services/adverts/advert.service";
   selector: 'app-advert-form',
   templateUrl: './advert-form.component.html',
   styleUrls: ['./advert-form.component.css'],
-  providers : [AdvertService],
 })
 export class AdvertFormComponent implements OnInit {
+
   @Input() submitLabel: string;
+  @Input() advertToEdit : Advert | undefined;
 
   formAdvert = this.fb.group({
     title: [Validators.required],
@@ -33,7 +34,7 @@ export class AdvertFormComponent implements OnInit {
   slotsSub: Subscription;
   areasSub: Subscription;
   advert : Advert;
-  adverts : Advert[] = [];
+
 
 
   @Output() formSubmitted:EventEmitter<Advert>
@@ -72,11 +73,12 @@ export class AdvertFormComponent implements OnInit {
       })
   }
 
-
-  add(advert: Advert): void {
-    this.advertService
-      .addAdvert(advert)
-      .subscribe(advert => this.adverts.push(advert))
+  //VOIR SI SUPPRESSION
+  onSubmitSerieForm():void {
+    if (this.formAdvert.valid) {
+      this.formSubmitted.emit(this.advert)
+    }
   }
+
 
 }
