@@ -6,7 +6,7 @@ export class Advert {
   private _title: string;
   private _dateStart: Date;
   private _dateEnd: Date;
-  private _areas: Area[];
+  private _areas: Array<Area>;
   private _slotTimes: SlotTime[];
   private _id: number | null;
 

@@ -11,6 +11,10 @@ private _start: number;
     return this._start;
   }
 
+  set start(value: number) {
+    this._start = value;
+  }
+
   static fromJson(slotAsJson: any): SlotTime {
     return new SlotTime(
     slotAsJson._start,
