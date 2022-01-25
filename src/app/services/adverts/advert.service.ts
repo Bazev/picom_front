@@ -40,12 +40,13 @@ export class AdvertService {
       );
   }
 
-  getAdvertById(id:number): Observable<Advert[]> {
+  getAdvertById(id : number) : Promise<Advert> {
     return this.http
-      .get<Advert[]>('https://picom.herokuapp.com/ws/advert/' + id)
+      .get('https://picom.herokuapp.com/ws/advert/'+id)
       .pipe(
-        catchError(this.handleError('getAdvertById', []))
-      );
+        map((data:any) => Advert.fromJson(data)))
+      .toPromise()
+      .then();
   }
 
   addAdvert(advert:Advert) : Observable<Advert> {

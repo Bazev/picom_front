@@ -19,8 +19,9 @@ export class SingleAdvertComponent implements OnInit {
     this.id = 0;
   }
   ngOnInit(): void {
-    const id :number = this.route.snapshot.params['id'];
+    const id : number = this.route.snapshot.params['id'];
     this.advertService
-      .getAdvertById(id);
+      .getAdvertById(id)
+      .then((advert:Advert) => this.advert = advert);
   }
 }
