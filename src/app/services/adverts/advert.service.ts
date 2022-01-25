@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {catchError, Observable} from "rxjs";
+import {catchError, map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Advert} from "../../models/advert.model";
 import {AuthService} from "../Auth/auth.service";
