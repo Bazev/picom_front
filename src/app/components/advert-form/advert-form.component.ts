@@ -41,7 +41,7 @@ export class AdvertFormComponent implements OnInit {
   constructor(private auth: AuthService, private slotService: SlotsTimeService,
               private areaService: AreaService, private fb: FormBuilder, private advertService :AdvertService) {
 
-    this.advert = new Advert(new Date(),new Date(), [], [], '')
+    this.advert = new Advert('',new Date(),new Date(), [], [], 0)
     this.submitLabel = '';
     this.formAdvert = new FormGroup({
       title: new FormControl(),
