@@ -1,11 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {Advert} from "../../models/advert.model";
 import {AdvertService} from "../../services/adverts/advert.service";
-import {ActivatedRoute} from "@angular/router";
-import {Area} from "../../models/area.model";
-import {SlotTime} from "../../models/slotTime.model";
-import {Arret} from "../../models/arret";
 
 @Component({
   selector: 'app-adverts',
@@ -26,7 +22,7 @@ export class AdvertsComponent implements OnInit {
 
   ngOnInit(): void {
     this.advertsSub = this.advertService
-      .adverts
+      .getAdverts()
       .subscribe(adverts => {
         this.adverts = adverts
       })

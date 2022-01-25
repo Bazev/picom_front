@@ -13,12 +13,14 @@ import {Arret} from "../../models/arret";
 export class SingleAdvertComponent implements OnInit {
 
   advert : Advert | undefined;
+  @Input() id : number;
+
   constructor(private advertService:AdvertService, private route:ActivatedRoute) {
+    this.id = 0;
   }
   ngOnInit(): void {
-    const id : number = this.route.snapshot.params['id'];
+    const id  = parseInt(this.route.snapshot.params['id']);
     this.advertService
-      .getAdvertById(id)
-      .then((advert:Advert) => this.advert = advert);
+      .getAdvertById(id);
   }
 }

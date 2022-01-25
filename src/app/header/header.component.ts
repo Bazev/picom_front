@@ -13,26 +13,24 @@ export class HeaderComponent implements OnInit {
 
   currentUserSubject : BehaviorSubject<User>;
   currentUser : Observable<User>
-  // token:boolean;
-  // tokenSub : Subscription;
 
-  constructor(private authService:AuthService, private router:Router) {
+
+  constructor(private authService:AuthService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(<string>localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable()
-
-
-    // this.token = false;
-    // this.tokenSub = new Subscription()
   }
 
 
-  onClickLogout() {
+  onClickLogout() : void {
     this.authService
       .logout()
   }
 
   ngOnInit(): void {
 
+  }
+
+  ngOnDestroy() {
   }
 
 }

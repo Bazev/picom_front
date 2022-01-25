@@ -2,20 +2,17 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../../models/user.model";
-import {any} from "codelyzer/util/function";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   currentUserSubject: BehaviorSubject<User>;
-  token : BehaviorSubject<string>
   public currentUser: Observable<User>
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(<string>localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
-    this.token = new BehaviorSubject<string>('');
   }
 
   public get currentUserValue(): User {
@@ -37,12 +34,16 @@ export class AuthService {
         return user;
       })).toPromise()
       .then((resp:any) => {
-      this.token.next(resp.token);
     });
   }
 
-  logout() {
+  logout() : Promise<void> {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(this.currentUserValue);
+    return new Promise<void>(
+    (res, rej) => {
+      res();
+    }
+    )
   }
 }

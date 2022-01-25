@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/Auth/auth.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
-import {first} from "rxjs";
 
 @Component({
   selector: 'app-login',

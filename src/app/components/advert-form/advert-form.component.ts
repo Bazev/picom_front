@@ -7,52 +7,55 @@ import {Subscription} from "rxjs";
 import {SlotsTimeService} from "../../services/slotTime/slots-time.service";
 import {AreaService} from "../../services/areas/area.service";
 import {SlotTime} from "../../models/slotTime.model";
-import {AdvertPicture} from "../../models/advertPicture.model";
 import {AdvertService} from "../../services/adverts/advert.service";
+
 
 @Component({
   selector: 'app-advert-form',
   templateUrl: './advert-form.component.html',
-  styleUrls: ['./advert-form.component.css']
+  styleUrls: ['./advert-form.component.css'],
+  providers : [AdvertService],
 })
 export class AdvertFormComponent implements OnInit {
+  @Input() submitLabel: string;
+
   formAdvert = this.fb.group({
     title: [Validators.required],
     dateStart: [Validators.required],
     dateEnd: [Validators.required],
-    slots: [Validators.required],
-    areas:[Validators.required]
+    slotsSelected: [Validators.required],
+    areasSelected:[Validators.required]
   });
-  @Input() submitLabel: string;
-  areasSub: Subscription;
-  listAreas: Array<Area>;
-  slots: FormControl
-  slotList: Array<SlotTime>;
-  slotsSub: Subscription;
-  advert: AdvertPicture;
 
-  @Output() formSubmitted:EventEmitter<AdvertPicture>
+
+  listAreas: Area[];
+  slotList: SlotTime[];
+  slotsSub: Subscription;
+  areasSub: Subscription;
+  advert : Advert;
+  adverts : Advert[] = [];
+
+
+  @Output() formSubmitted:EventEmitter<Advert>
 
   constructor(private auth: AuthService, private slotService: SlotsTimeService,
-              private areaService: AreaService, private fb: FormBuilder, private advertServ:AdvertService) {
+              private areaService: AreaService, private fb: FormBuilder, private advertService :AdvertService) {
+
+    this.advert = new Advert(new Date(),new Date(), [], [], '')
     this.submitLabel = '';
-    const id = this.auth.currentUserValue.id
     this.formAdvert = new FormGroup({
       title: new FormControl(),
       dateStart: new FormControl(),
       dateEnd: new FormControl(),
       areas: new FormControl(),
-      slots: new FormControl()
+      slotTimes : new FormControl()
     });
-    this.areasSub = new Subscription();
+
     this.listAreas = [];
     this.slotList = [];
-    this.slots = new FormControl([]);
-    // this.formAreas = new FormControl([]);
     this.slotsSub = new Subscription();
+    this.areasSub = new Subscription();
     this.formSubmitted = new EventEmitter<Advert>();
-    this.advert = new AdvertPicture("", new Date(), new Date(), 0, new Array<Area>(), new Array<SlotTime>(), id)
-
   }
 
   ngOnInit(): void {
@@ -70,11 +73,10 @@ export class AdvertFormComponent implements OnInit {
   }
 
 
-  onSubmitForm() : void {
-    if (this.formAdvert.valid) {
-      this.formSubmitted.emit(this.advert);
-      console.log("Ajout d'une annonce")
-    }
+  add(advert: Advert): void {
+    this.advertService
+      .addAdvert(advert)
+      .subscribe(advert => this.adverts.push(advert))
   }
 
 }

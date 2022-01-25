@@ -1,40 +1,42 @@
- <form [formGroup]="formAdvert"(ngSubmit)="onSubmitForm()" class="my-3">
+<form [formGroup]="formAdvert" class="my-3">
 
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Entrez l'intitulé de l'annonce</mat-label>
-      <textarea matInput placeholder="Ex. plomberie, chauffage"
-                formControlName="title" required></textarea>
-    </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Entrez l'intitulé de l'annonce</mat-label>
+    <textarea matInput placeholder="Ex. plomberie, chauffage"
+              formControlName="title" required></textarea>
+  </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Dates de diffusion</mat-label>
-      <mat-date-range-input [rangePicker]="picker">
-        <input matStartDate placeholder="Start date"
-               formControlName="dateStart" required>
-        <input matEndDate placeholder="End date"
-               formControlName="dateEnd" required>
-      </mat-date-range-input>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
-    <br/>
+  <mat-form-field appearance="fill">
+    <mat-label>Dates de diffusion</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date"
+             formControlName="dateStart" required>
+      <input matEndDate placeholder="End date"
+             formControlName="dateEnd" required>
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+  <br/>
 
-   <mat-form-field appearance="fill" formArrayName="areas">
-     <mat-label>Zones</mat-label>
-     <mat-select [formControl]="slots" multiple required>
-       <mat-option *ngFor="let area of listAreas" [value]="area">{{area.name}}</mat-option>
-     </mat-select>
-   </mat-form-field>
-   <br/>
+  <mat-form-field appearance="fill">
+    <mat-label>Zones</mat-label>
+    <mat-select formControlName="areas" multiple required>
+      <mat-option *ngFor="let area of listAreas" [value]="area">{{area.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br/>
 
-    <mat-form-field appearance="fill" formArrayName="slots">
-      <mat-label>Créneaux horaires</mat-label>
-      <mat-select [formControl]="slots" multiple required>
-        <mat-option *ngFor="let slot of slotList" [value]="slot">{{slot.start +" H"}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <br/>
+  <mat-form-field appearance="fill">
+    <mat-label>Créneaux horaires</mat-label>
+    <mat-select formControlName="slotTimes" multiple required>
+      <mat-option *ngFor="let slot of slotList" [value]="slot">{{slot.start + " H"}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br/>
+</form>
+<button (click)="add(formAdvert.value)" [disabled]="formAdvert.invalid" type="submit" mat-button color="primary">
+  Ajouter
+</button>
 
-    <button [disabled]="formAdvert.invalid" type="submit" mat-button color="primary">Ajouter</button>
-  </form>
 

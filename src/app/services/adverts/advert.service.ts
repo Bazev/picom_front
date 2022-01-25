@@ -1,59 +1,59 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, first, map, Observable, Subject} from "rxjs";
+import {catchError, Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Advert} from "../../models/advert.model";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "../Auth/auth.service";
 import {User} from "../../models/user.model";
-import {Router} from "@angular/router";
-import {AdvertPicture} from "../../models/advertPicture.model";
+import {HandleError, HttpErrorHandler} from "../../http-error-handler.service";
 
+const BASEURL = 'https://picom.herokuapp.com/ws/';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    "Content-Type": "application/json"
+  })
+};
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdvertService {
-  adverts: BehaviorSubject<Array<AdvertPicture>>
-  // adverts = new Subject<any[]>();
   currentUser: User;
+  handleError: HandleError;
 
-  constructor(private http: HttpClient, private authService: AuthService, private router:Router) {
+
+  constructor(private http: HttpClient, private authService: AuthService, httpErrorHandler: HttpErrorHandler) {
+    this.handleError = httpErrorHandler.createHandleError('advertService')
     this.currentUser = this.authService.currentUserValue;
-    this.adverts = new BehaviorSubject<Array<AdvertPicture>>([]);
     this.getAdverts()
+
   }
 
-  getAdverts() {
-   const id = this.authService.currentUserValue.id
-    console.log(this.currentUser)
-    this.http
-      .get('https://picom.herokuapp.com/ws/customer/'+id+'/adverts')
+  getAdverts() : Observable<Advert[]>{
+    const id = this.authService.currentUserValue.id
+    return this.http
+      .get<Advert[]>('https://picom.herokuapp.com/ws/customer/' + id + '/adverts')
       .pipe(
-        map((data: any) => data.map((data: any) => Advert.fromJson(data))))
-      .toPromise()
-      .then((adverts: Array<Advert>) => {
-        this.adverts.next(adverts);
-      })
+        catchError(this.handleError('getAdverts', []))
+      );
   }
 
-  getAdvertById(id : number) : Promise<Advert> {
-   return this.http
-      .get('https://picom.herokuapp.com/ws/advert/'+id)
+  getAdvertById(id:number): Observable<Advert[]> {
+    return this.http
+      .get<Advert[]>('https://picom.herokuapp.com/ws/advert/' + id)
       .pipe(
-        map((data:any) => Advert.fromJson(data)))
-      .toPromise()
-     .then();
+        catchError(this.handleError('getAdvertById', []))
+      );
   }
 
- save(advertPicture:AdvertPicture):Promise<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append(`Access-Control-Allow-Origin': '*'`, this.authService.token.getValue());
-
-    const adverts = this.adverts.getValue();
-    adverts.push(advertPicture)
-   this.adverts.next(adverts)
-   return this.http
-     .post('https://picom.herokuapp.com/ws/advertPicture/', advertPicture.toJson(), {headers})
-     .toPromise()
- }
+  addAdvert(advert:Advert) : Observable<Advert> {
+    const id = this.authService.currentUserValue.id
+    return this.http.post<Advert>('https://picom.herokuapp.com/ws/' +'advert/' + id ,  JSON.stringify(advert), httpOptions)
+      .pipe(
+        catchError(this.handleError('addAdvert', advert))
+      );
+  }
 
 }
