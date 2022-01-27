@@ -1,4 +1,4 @@
-<form [formGroup]="formAdvert" (ngSubmit)="onSubmitSerieForm()" class="my-3">
+<form [formGroup]="formAdvert" class="my-3">
 
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Entrez l'intitulé de l'annonce</mat-label>
@@ -35,8 +35,8 @@
   </mat-form-field>
   <br/>
 </form>
-<button  type="submit" mat-button color="primary" [disabled]="formAdvert.invalid">
-  {{submitLabel}}
+<button (click)="add(formAdvert.value)" [disabled]="formAdvert.invalid" type="submit" mat-button color="primary">
+  Ajouter
 </button>
 
 

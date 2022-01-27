@@ -34,7 +34,7 @@ export class AdvertFormComponent implements OnInit {
   slotsSub: Subscription;
   areasSub: Subscription;
   advert : Advert;
-
+  adverts : Advert[] = [];
 
 
   @Output() formSubmitted:EventEmitter<Advert>
@@ -73,12 +73,11 @@ export class AdvertFormComponent implements OnInit {
       })
   }
 
-  //VOIR SI SUPPRESSION
-  onSubmitSerieForm():void {
-    if (this.formAdvert.valid) {
-      this.formSubmitted.emit(this.advert)
-    }
-  }
 
+  add(advert: Advert): void {
+    this.advertService
+      .addAdvert(advert)
+      .subscribe(advert => this.adverts.push(advert))
+  }
 
 }

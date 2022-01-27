@@ -56,25 +56,4 @@ export class AdvertService {
         catchError(this.handleError('addAdvert', advert))
       );
   }
-
-  modifierAnnonce(annonceModifie: Advert): Promise<void> {
-    return new Promise<void>(
-      (resolve, rej) => {
-        setTimeout(() => {
-          const adverts = this.annonces.getValue()
-          adverts.push(annonceModifie)
-
-          for (const [index, annonce] of adverts.entries()) {
-            if (annonce.id === annonceModifie.id) {
-              adverts[index] = annonceModifie;
-            }
-          }
-          this.annonces.next(adverts)
-          return this.http
-            .post('https://picom.herokuapp.com/ws/advert'+ annonceModifie.id + JSON.stringify(annonceModifie), httpOptions)
-            .toPromise()
-        })
-      }
-    )
-  }
 }
